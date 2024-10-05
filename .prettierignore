@@ -1,0 +1,10 @@
+# Ignore artifacts:
+build
+coverage
+package-lock.json
+.next
+node_modules/
+out/
+.vscode/
+.swcrc
+tsconfig.json
