@@ -64,3 +64,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .container {
+    @apply mx-auto h-full w-full max-w-[1400px] px-5 py-16 md:px-16 md:py-24 lg:px-28;
+  }
+}
