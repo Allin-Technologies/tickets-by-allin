@@ -1,15 +1,54 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import TrailingIcon from "@/assets/Trailing.svg?react";
+import ChevronIcon from "@/assets/chevron.svg?react";
 
 export const Route = createFileRoute("/_layout/$event/_layout")({
   component: EventLayout,
 });
 
 function EventLayout() {
+  const navigate = useNavigate();
+  const { event } = useParams({ from: "/_layout/$event" });
+  const { pathname } = useLocation();
+
   return (
     <div className="text-allin-text container">
+      <div className="mb-20 flex items-center gap-5">
+        <Button
+          variant="link"
+          onClick={() => navigate({ to: "/$event/tickets", params: { event } })}
+          data-state={pathname.includes("tickets") && "active"}
+          className="data-[state=active]:text-allin-primary text-2xl font-semibold"
+        >
+          Tickets
+        </Button>
+        <ChevronIcon />
+        <Button
+          variant="link"
+          onClick={() => navigate({ to: "/$event/contact", params: { event } })}
+          data-state={pathname.includes("contact") && "active"}
+          className="data-[state=active]:text-allin-primary text-2xl font-semibold"
+        >
+          Contact
+        </Button>
+        <ChevronIcon />
+        <Button
+          variant="link"
+          onClick={() => navigate({ to: "/$event/payment", params: { event } })}
+          data-state={pathname.includes("payment") && "active"}
+          className="data-[state=active]:text-allin-primary text-2xl font-semibold"
+        >
+          Payment
+        </Button>
+      </div>
       <div className="flex items-start gap-20">
         <div className="grow space-y-5">
           <Outlet />
@@ -54,7 +93,7 @@ function EventLayout() {
             </span>
           </div>
           <Button className="w-full" size="lg">
-            Continue
+            {pathname.includes("payment") ? "Proceed to payment" : "Continue"}
           </Button>
         </div>
       </div>
