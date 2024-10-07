@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { createFileRoute, Outlet, Link } from "@tanstack/react-router";
-import Logo from "@/assets/logo.svg?react";
-import LogoPlain from "@/assets/logo-plain.svg?react";
-import FacebookIcon from "@/assets/facebook.svg?react";
-import TwitterIcon from "@/assets/Twitter.svg?react";
-import LinkedInIcon from "@/assets/Linkedin.svg?react";
-import InstagramIcon from "@/assets/Instagram.svg?react";
+import Logo from "@/assets/icons/logo.svg?react";
+import LogoPlain from "@/assets/icons/logo-plain.svg?react";
+import FacebookIcon from "@/assets/icons/facebook.svg?react";
+import TwitterIcon from "@/assets/icons/Twitter.svg?react";
+import LinkedInIcon from "@/assets/icons/Linkedin.svg?react";
+import InstagramIcon from "@/assets/icons/Instagram.svg?react";
 
 export const Route = createFileRoute("/_layout")({
   component: () => (

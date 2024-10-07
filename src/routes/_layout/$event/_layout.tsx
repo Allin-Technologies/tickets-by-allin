@@ -7,8 +7,8 @@ import {
 } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import TrailingIcon from "@/assets/Trailing.svg?react";
-import ChevronIcon from "@/assets/chevron.svg?react";
+import TrailingIcon from "@/assets/icons/Trailing.svg?react";
+import ChevronIcon from "@/assets/icons/chevron.svg?react";
 
 export const Route = createFileRoute("/_layout/$event/_layout")({
   component: EventLayout,
