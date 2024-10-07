@@ -1,4 +1,4 @@
-import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { Outlet, createRootRoute, useRouter } from "@tanstack/react-router";
 import { Suspense } from "react";
 import { TanStackRouterDevtools } from "@/components/tanstack";
 import { GlobalStateProvider } from "@/contexts/global-state";
@@ -8,6 +8,13 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
+  const router = useRouter();
+
+  // Scroll to the top when the route changes
+  router.subscribe("onBeforeLoad", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
   return (
     <GlobalStateProvider>
       <Outlet />
