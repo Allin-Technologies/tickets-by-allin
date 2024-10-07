@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import React from "react";
-import PlusIcon from "@/assets/plus.svg?react";
-import MinusIcon from "@/assets/minus.svg?react";
+import PlusIcon from "@/assets/icons/plus.svg?react";
+import MinusIcon from "@/assets/icons/minus.svg?react";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_layout/$event/_layout/tickets")({
