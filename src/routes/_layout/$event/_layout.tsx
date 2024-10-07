@@ -124,7 +124,7 @@ export const PrevButtonComponent = ({ props: { to, from } }: PrevButtonProps) =>
   return (
     <Button
       variant="link"
-      onClick={() => navigate({ to: to, params: { event }})}
+      onClick={() => navigate({ to: to, params: { event } })}
       className="mb-10 inline-flex items-center p-0 font-semibold text-[#8692A6]"
     >
       <span className="rotate-180">
