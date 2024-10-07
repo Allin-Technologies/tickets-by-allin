@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, useParams } from "@tanstack/react-router";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
@@ -9,15 +9,34 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  PageTitle,
+  PrevButton,
+  PrevButtonComponent,
+  NextButton,
+} from "@/routes/_layout/$event/_layout";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_layout/$event/_layout/contact")({
   component: Contact,
 });
 
 function Contact() {
+  const navigate = useNavigate({});
+  const { event } = useParams({ from: "/_layout/$event/_layout/contact" });
+
+  const handleSubmit = () => {
+    navigate({ to: "/$event/payment", params: { event } });
+  };
+
   return (
     <>
-      <h1 className="mb-10 text-4xl font-bold">Contact Information</h1>
+      <PrevButton.Slot>
+        <PrevButtonComponent
+          props={{ to: "/$event/tickets", from: "/_layout/$event/_layout/contact" }}
+        />
+      </PrevButton.Slot>
+      <PageTitle.Slot>Contact Information</PageTitle.Slot>
       <div className="bg-allin-primary/10">
         <p className="border-allin-primary rounded border p-5 font-medium">
           We’ve reserved your ticket. Please complete checkout within
@@ -61,17 +80,16 @@ function Contact() {
         </div>
         <div className="space-y-2">
           <Label className="before:text-allin-primary before:font-semibold before:content-['*']">
-            Confirm email address
-          </Label>
-          <Input placeholder="Confirm email address" className="h-12 border-[#8692A6]" />
-        </div>
-        <div className="space-y-2">
-          <Label className="before:text-allin-primary before:font-semibold before:content-['*']">
             Phone number
           </Label>
           <Input placeholder="Phone number" className="h-12 border-[#8692A6]" />
         </div>
       </form>
+      <NextButton.Slot>
+        <Button className="mt-5 w-full" size="lg" onClick={handleSubmit}>
+          Continue
+        </Button>
+      </NextButton.Slot>
     </>
   );
 }

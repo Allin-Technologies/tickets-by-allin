@@ -1,15 +1,5 @@
-import { createFileRoute, Link, useNavigate, useParams } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, useParams } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 export const Route = createFileRoute("/_layout/$event/")({
   component: Event,
@@ -21,7 +11,7 @@ function Event() {
 
   return (
     <>
-      <div className="container flex gap-20 *:w-full *:grow">
+      <div className="container flex flex-col gap-20 *:w-full *:grow md:flex-row">
         <div className="space-y-20">
           <div className="h-[604px] rounded-3xl border shadow-md" />
           <Button size="lg" onClick={() => navigate({ to: "/$event/tickets", params: { event } })}>
@@ -62,97 +52,57 @@ function Event() {
       </div>
       <div className="container space-y-20">
         <h2 className="text-allin-text text-4xl font-semibold">Other Events You May Like</h2>
-        <div className="grid grid-cols-3 gap-5">
-          <div className="w-full min-w-[340px] overflow-hidden rounded-[19px] bg-white">
-            <div className="h-44 bg-red-100" />
-            <div className="h-32 p-5">
-              <h3>JYJ 2011 JYJ Worldwide Concert Barcelona</h3>
-              <p>
-                Directly seated and inside for you to enjoy the show. kjdnakjdskamlksm sou to enjoy
-                the show.
+        <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="w-full min-w-[340px] overflow-hidden rounded-[19px] bg-white shadow-sm">
+            <div className="h-[12.3rem] bg-red-100" />
+            <div className="flex h-36 items-start gap-5 p-5">
+              <p className="flex flex-col items-center font-bold">
+                <span className="text-allin-primary">AUG</span>
+                <span className="text-allin-text text-3xl">14</span>
               </p>
+              <div>
+                <h3 className="text-allin-text text-lg font-bold">
+                  Wonder Girls 2010 Wonder Girls World Tour San Francisco
+                </h3>
+                <p className="text-allin-gray-light">
+                  Directly seated and inside for you to enjoy the show.
+                </p>
+              </div>
             </div>
           </div>
-          <div className="w-full min-w-[340px] overflow-hidden rounded-[19px] bg-white">
-            <div className="h-44 bg-red-100" />
-            <div className="h-32 p-5">
-              <h3>JYJ 2011 JYJ Worldwide Concert Barcelona</h3>
-              <p>Directly seated and inside for you to enjoy the show.</p>
+          <div className="w-full min-w-[340px] overflow-hidden rounded-[19px] bg-white shadow-sm">
+            <div className="h-[12.3rem] bg-red-100" />
+            <div className="flex h-36 items-start gap-5 p-5">
+              <p className="flex flex-col items-center font-bold">
+                <span className="text-allin-primary">AUG</span>
+                <span className="text-allin-text text-3xl">14</span>
+              </p>
+              <div>
+                <h3 className="text-allin-text text-lg font-bold">
+                  Wonder Girls 2010 Wonder Girls World Tour San Francisco
+                </h3>
+                <p className="text-allin-gray-light">
+                  Directly seated and inside for you to enjoy the show.
+                </p>
+              </div>
             </div>
           </div>
-          <div className="w-full min-w-[340px] overflow-hidden rounded-[19px] bg-white">
-            <div className="h-44 bg-red-100" />
-            <div className="h-32 p-5">
-              <h3>JYJ 2011 JYJ Worldwide Concert Barcelona</h3>
-              <p>Directly seated and inside for you to enjoy the show.</p>
+          <div className="w-full min-w-[340px] overflow-hidden rounded-[19px] bg-white shadow-sm">
+            <div className="h-[12.3rem] bg-red-100" />
+            <div className="flex h-36 items-start gap-5 p-5">
+              <p className="flex flex-col items-center font-bold">
+                <span className="text-allin-primary">AUG</span>
+                <span className="text-allin-text text-3xl">14</span>
+              </p>
+              <div>
+                <h3 className="text-allin-text text-lg font-bold">
+                  JYJ 2011 JYJ Worldwide Concert Barcelona
+                </h3>
+                <p className="text-allin-gray-light">
+                  Directly seated and inside for you to enjoy the show.
+                </p>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div
-        style={{
-          background:
-            "linear-gradient(to right, #43dbdb33 0%, #43dbdb33 50%, #b9a6e81a 50%, #b9a6e81a 100%)",
-        }}
-      >
-        <div className="container flex gap-40 *:w-full *:grow">
-          <div className="flex flex-col gap-10">
-            <h3 className="text-2xl font-bold">Contact us</h3>
-            <p className="text-2xl">Have an inquiry? We’ll be happy to assist you</p>
-            <div className="contents font-bold">
-              <Link>+234 333 6527</Link>
-              <Link>Tickets@all-in.com</Link>
-              <Link>All-in Headquaters, GRA Port Harcourt, Nigeria</Link>
-            </div>
-          </div>
-          <div className="">
-            <h3 className="mb-10 text-2xl font-bold">Fill in your details</h3>
-            <form className="flex flex-col gap-10">
-              <div className="relative">
-                <Label className="absolute -top-2 z-[1] text-xs text-[#222222]">Name</Label>
-                <Input
-                  type="text"
-                  placeholder="Enter name"
-                  className="h-12 rounded-none border-0 border-b border-gray-300 px-0 shadow-none"
-                />
-              </div>
-              <div className="relative">
-                <Label className="absolute -top-2 z-[1] text-xs text-[#222222]">Email</Label>
-                <Input
-                  type="email"
-                  placeholder="Enter email"
-                  className="h-12 rounded-none border-0 border-b border-gray-300 px-0 shadow-none"
-                />
-              </div>
-              <div className="relative">
-                <Label className="absolute -top-2 z-[1] text-xs text-[#222222]">
-                  Reason to contact
-                </Label>
-                <Select>
-                  <SelectTrigger className="h-12 rounded-none border-0 border-b border-gray-300 px-0 shadow-none focus-visible:ring-0">
-                    <SelectValue placeholder="Select reason" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="item1">Lorem ispum</SelectItem>
-                      <SelectItem value="item2">Lorem ispum</SelectItem>
-                      <SelectItem value="item3">Lorem ispum</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="relative">
-                <Label className="text-allin-lilac absolute -top-2 z-[1] text-xs">Message</Label>
-                <Input
-                  type="message"
-                  placeholder="What is your message?"
-                  className="border-allin-lilac h-12 rounded-none border-0 border-b px-0 shadow-none"
-                />
-              </div>
-              <Button size="lg" className="mt-10 w-full">
-                Submit
-              </Button>
-            </form>
           </div>
         </div>
       </div>

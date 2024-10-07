@@ -9,48 +9,49 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import TrailingIcon from "@/assets/icons/Trailing.svg?react";
 import ChevronIcon from "@/assets/icons/chevron.svg?react";
+import { makePortal } from "@/lib/make-portals";
 
 export const Route = createFileRoute("/_layout/$event/_layout")({
   component: EventLayout,
 });
 
 function EventLayout() {
-  const navigate = useNavigate();
-  const { event } = useParams({ from: "/_layout/$event" });
   const { pathname } = useLocation();
 
   return (
-    <div className="text-allin-text container">
-      <div className="mb-20 flex items-center gap-5">
-        <Button
-          variant="link"
-          onClick={() => navigate({ to: "/$event/tickets", params: { event } })}
+    <div className="text-allin-text container pt-5">
+      <PrevButton.Outlet>
+        <span />
+      </PrevButton.Outlet>
+      <div className="mb-20 flex w-fit items-center gap-7">
+        <h2
           data-state={pathname.includes("tickets") && "active"}
           className="data-[state=active]:text-allin-primary text-2xl font-semibold"
         >
           Tickets
-        </Button>
+        </h2>
         <ChevronIcon />
-        <Button
-          variant="link"
-          onClick={() => navigate({ to: "/$event/contact", params: { event } })}
+        <h2
           data-state={pathname.includes("contact") && "active"}
           className="data-[state=active]:text-allin-primary text-2xl font-semibold"
         >
           Contact
-        </Button>
+        </h2>
         <ChevronIcon />
-        <Button
-          variant="link"
-          onClick={() => navigate({ to: "/$event/payment", params: { event } })}
+        <h2
           data-state={pathname.includes("payment") && "active"}
           className="data-[state=active]:text-allin-primary text-2xl font-semibold"
         >
           Payment
-        </Button>
+        </h2>
       </div>
       <div className="flex items-start gap-20">
         <div className="grow space-y-5">
+          <PageTitle.Outlet>
+            <h1 className="mb-10 text-4xl font-bold">
+              <span />
+            </h1>
+          </PageTitle.Outlet>
           <Outlet />
         </div>
         <div className="w-[350px] space-y-5 rounded-md border bg-white p-6 shadow-md">
@@ -92,11 +93,44 @@ function EventLayout() {
               <TrailingIcon />
             </span>
           </div>
-          <Button className="w-full" size="lg">
-            {pathname.includes("payment") ? "Proceed to payment" : "Continue"}
-          </Button>
+          <NextButton.Outlet>
+            <span />
+          </NextButton.Outlet>
         </div>
       </div>
     </div>
   );
 }
+
+export const PageTitle = makePortal("page-title");
+export const PrevButton = makePortal("prev-button");
+export const NextButton = makePortal("next-button");
+
+type From =
+  | "/_layout/$event"
+  | "/_layout/$event/_layout/contact"
+  | "/_layout/$event/_layout/payment"
+  | "/_layout/$event/_layout/tickets";
+
+type To = "/$event" | "/$event/contact" | "/$event/payment" | "/$event/tickets";
+interface PrevButtonProps {
+  props: { to: To; from: From };
+}
+
+export const PrevButtonComponent = ({ props: { to, from } }: PrevButtonProps) => {
+  const navigate = useNavigate({});
+  const { event } = useParams({ from });
+
+  return (
+    <Button
+      variant="link"
+      onClick={() => navigate({ to: to, params: { event }})}
+      className="mb-10 inline-flex items-center p-0 font-semibold text-[#8692A6]"
+    >
+      <span className="rotate-180">
+        <ChevronIcon />
+      </span>
+      Back
+    </Button>
+  );
+};
