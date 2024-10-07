@@ -4,6 +4,9 @@ export default {
 	content: ["./src/**/*.{ts,tsx,js,jsx}",],
 	theme: {
 		extend: {
+			fontFamily: {
+				"plus_jakarta_sans": ["Plus Jakarta Sans", "sans-serif"],
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
