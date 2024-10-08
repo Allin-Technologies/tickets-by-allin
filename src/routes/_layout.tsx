@@ -1,4 +1,4 @@
-import { createFileRoute, Outlet, Link } from "@tanstack/react-router";
+import { createFileRoute, Outlet, Link, useLocation } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -19,10 +19,11 @@ import FacebookIcon from "@/assets/icons/facebook.svg?react";
 import TwitterIcon from "@/assets/icons/Twitter.svg?react";
 import LinkedInIcon from "@/assets/icons/Linkedin.svg?react";
 import InstagramIcon from "@/assets/icons/Instagram.svg?react";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_layout")({
   component: () => (
-    <div className="font-plus_jakarta_sans bg-[#F2F2F2]">
+    <div className="relative bg-[#F2F2F2] font-plus_jakarta_sans">
       <Navbar />
       <main className="min-h-[calc(100dvh-250px)]">
         <Outlet />
@@ -33,19 +34,37 @@ export const Route = createFileRoute("/_layout")({
 });
 
 function Navbar() {
+  const { pathname } = useLocation();
+  const isHomePage = pathname === "/";
+
+  const navItems = [
+    ["Discover Events", "/discover-events"],
+    ["How Tickets Work", "/"],
+    ["Pricing", "/"],
+    ["About", "/"],
+  ];
+
   return (
-    <header className="mx-auto flex h-[100px] w-full max-w-[1500px] items-center gap-10 px-20">
-      <Link to="/">
-        <Logo />
-      </Link>
-      <nav className="text-allin-gray-dark contents font-semibold">
-        <Link className="ml-auto">Discover Events</Link>
-        <Link>How Tickets Work</Link>
-        <Link>Pricing</Link>
-        <Link>About</Link>
-      </nav>
-      <Button size="lg">Login</Button>
-    </header>
+    <div className={cn({ "absolute left-0 right-0 w-full": isHomePage })}>
+      <header className="mx-auto flex h-[100px] w-full max-w-[1500px] items-center justify-between gap-10 px-20">
+        <Link to="/">
+          <Logo />
+        </Link>
+        <nav className="flex gap-10">
+          {navItems.map(([title, slug]) => (
+            <Link
+              key={title}
+              to={slug}
+              className={cn("font-semibold text-allin-text transition-all", {
+                "text-white hover:text-white/50": isHomePage,
+              })}
+            >
+              {title}
+            </Link>
+          ))}
+        </nav>
+      </header>
+    </div>
   );
 }
 
@@ -111,11 +130,11 @@ function Footer() {
                 </Select>
               </div>
               <div className="relative">
-                <Label className="text-allin-lilac absolute -top-4 z-[1] text-sm">Message</Label>
+                <Label className="absolute -top-4 z-[1] text-sm text-allin-lilac">Message</Label>
                 <Input
                   type="message"
                   placeholder="What is your message?"
-                  className="border-allin-lilac h-12 rounded-none border-0 border-b px-0 shadow-none"
+                  className="h-12 rounded-none border-0 border-b border-allin-lilac px-0 shadow-none"
                 />
               </div>
               <Button size="lg" className="mt-10 w-full">

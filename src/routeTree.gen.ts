@@ -15,6 +15,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
+import { Route as LayoutDiscoverEventsImport } from './routes/_layout/discover-events'
 import { Route as LayoutEventIndexImport } from './routes/_layout/$event/index'
 import { Route as LayoutEventLayoutImport } from './routes/_layout/$event/_layout'
 import { Route as LayoutEventLayoutTicketsImport } from './routes/_layout/$event/_layout/tickets'
@@ -39,6 +40,11 @@ const LayoutEventRoute = LayoutEventImport.update({
 
 const LayoutIndexRoute = LayoutIndexImport.update({
   path: '/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutDiscoverEventsRoute = LayoutDiscoverEventsImport.update({
+  path: '/discover-events',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -77,6 +83,13 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
+    }
+    '/_layout/discover-events': {
+      id: '/_layout/discover-events'
+      path: '/discover-events'
+      fullPath: '/discover-events'
+      preLoaderRoute: typeof LayoutDiscoverEventsImport
+      parentRoute: typeof LayoutImport
     }
     '/_layout/': {
       id: '/_layout/'
@@ -162,11 +175,13 @@ const LayoutEventRouteWithChildren = LayoutEventRoute._addFileChildren(
 )
 
 interface LayoutRouteChildren {
+  LayoutDiscoverEventsRoute: typeof LayoutDiscoverEventsRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
   LayoutEventRoute: typeof LayoutEventRouteWithChildren
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
+  LayoutDiscoverEventsRoute: LayoutDiscoverEventsRoute,
   LayoutIndexRoute: LayoutIndexRoute,
   LayoutEventRoute: LayoutEventRouteWithChildren,
 }
@@ -176,6 +191,7 @@ const LayoutRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '': typeof LayoutRouteWithChildren
+  '/discover-events': typeof LayoutDiscoverEventsRoute
   '/': typeof LayoutIndexRoute
   '/$event': typeof LayoutEventLayoutRouteWithChildren
   '/$event/': typeof LayoutEventIndexRoute
@@ -185,6 +201,7 @@ export interface FileRoutesByFullPath {
 }
 
 export interface FileRoutesByTo {
+  '/discover-events': typeof LayoutDiscoverEventsRoute
   '/': typeof LayoutIndexRoute
   '/$event': typeof LayoutEventIndexRoute
   '/$event/contact': typeof LayoutEventLayoutContactRoute
@@ -195,6 +212,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_layout': typeof LayoutRouteWithChildren
+  '/_layout/discover-events': typeof LayoutDiscoverEventsRoute
   '/_layout/': typeof LayoutIndexRoute
   '/_layout/$event': typeof LayoutEventRouteWithChildren
   '/_layout/$event/_layout': typeof LayoutEventLayoutRouteWithChildren
@@ -208,6 +226,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
+    | '/discover-events'
     | '/'
     | '/$event'
     | '/$event/'
@@ -216,6 +235,7 @@ export interface FileRouteTypes {
     | '/$event/tickets'
   fileRoutesByTo: FileRoutesByTo
   to:
+    | '/discover-events'
     | '/'
     | '/$event'
     | '/$event/contact'
@@ -224,6 +244,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_layout'
+    | '/_layout/discover-events'
     | '/_layout/'
     | '/_layout/$event'
     | '/_layout/$event/_layout'
@@ -260,9 +281,14 @@ export const routeTree = rootRoute
     "/_layout": {
       "filePath": "_layout.tsx",
       "children": [
+        "/_layout/discover-events",
         "/_layout/",
         "/_layout/$event"
       ]
+    },
+    "/_layout/discover-events": {
+      "filePath": "_layout/discover-events.tsx",
+      "parent": "/_layout"
     },
     "/_layout/": {
       "filePath": "_layout/index.tsx",

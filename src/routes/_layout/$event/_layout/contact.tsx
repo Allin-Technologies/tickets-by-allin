@@ -38,26 +38,26 @@ function Contact() {
       </PrevButton.Slot>
       <PageTitle.Slot>Contact Information</PageTitle.Slot>
       <div className="bg-allin-primary/10">
-        <p className="border-allin-primary rounded border p-5 font-medium">
+        <p className="rounded border border-allin-primary p-5 font-medium">
           We’ve reserved your ticket. Please complete checkout within
-          <span className="text-allin-primary"> 10:00 </span>to secure your tickets.
+          <span className="text-allin-primary">10:00</span>to secure your tickets.
         </p>
       </div>
       <form className="space-y-5">
         <div className="space-y-2">
-          <Label className="before:text-allin-primary before:font-semibold before:content-['*']">
+          <Label className="before:font-semibold before:text-allin-primary before:content-['*']">
             First name
           </Label>
           <Input placeholder="First name" className="h-12 border-[#8692A6]" />
         </div>
         <div className="space-y-2">
-          <Label className="before:text-allin-primary before:font-semibold before:content-['*']">
+          <Label className="before:font-semibold before:text-allin-primary before:content-['*']">
             Last name
           </Label>
           <Input placeholder="Last name" className="h-12 border-[#8692A6]" />
         </div>
         <div className="space-y-2">
-          <Label className="before:text-allin-primary before:font-semibold before:content-['*']">
+          <Label className="before:font-semibold before:text-allin-primary before:content-['*']">
             Gender
           </Label>
           <Select>
@@ -73,13 +73,13 @@ function Contact() {
           </Select>
         </div>
         <div className="space-y-2">
-          <Label className="before:text-allin-primary before:font-semibold before:content-['*']">
+          <Label className="before:font-semibold before:text-allin-primary before:content-['*']">
             Email address
           </Label>
           <Input placeholder="Email address" className="h-12 border-[#8692A6]" />
         </div>
         <div className="space-y-2">
-          <Label className="before:text-allin-primary before:font-semibold before:content-['*']">
+          <Label className="before:font-semibold before:text-allin-primary before:content-['*']">
             Phone number
           </Label>
           <Input placeholder="Phone number" className="h-12 border-[#8692A6]" />

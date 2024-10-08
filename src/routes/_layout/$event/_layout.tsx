@@ -19,28 +19,28 @@ function EventLayout() {
   const { pathname } = useLocation();
 
   return (
-    <div className="text-allin-text container pt-5">
+    <div className="container pt-5 text-allin-text">
       <PrevButton.Outlet>
         <span />
       </PrevButton.Outlet>
       <div className="mb-20 flex w-fit items-center gap-7">
         <h2
           data-state={pathname.includes("tickets") && "active"}
-          className="data-[state=active]:text-allin-primary text-2xl font-semibold"
+          className="text-2xl font-semibold data-[state=active]:text-allin-primary"
         >
           Tickets
         </h2>
         <ChevronIcon />
         <h2
           data-state={pathname.includes("contact") && "active"}
-          className="data-[state=active]:text-allin-primary text-2xl font-semibold"
+          className="text-2xl font-semibold data-[state=active]:text-allin-primary"
         >
           Contact
         </h2>
         <ChevronIcon />
         <h2
           data-state={pathname.includes("payment") && "active"}
-          className="data-[state=active]:text-allin-primary text-2xl font-semibold"
+          className="text-2xl font-semibold data-[state=active]:text-allin-primary"
         >
           Payment
         </h2>
@@ -61,7 +61,7 @@ function EventLayout() {
           <table className="w-full [&>tr>td:last-of-type]:text-right [&_td]:py-2 [&_td]:align-top">
             <tbody>
               <tr>
-                <td>1 × Prime Pass (Duo)- Flash Sale</td>
+                <td>1 × Prime Pass (Duo)- Flash Sale</td>
                 <td>₦14,800</td>
               </tr>
               <tr>
