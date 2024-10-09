@@ -25,27 +25,41 @@ function Tickets() {
   return (
     <>
       <PrevButton.Slot>
-        <PrevButtonComponent props={{ to: "/$event", from: "/_layout/$event/_layout/tickets" }} />
+        <PrevButtonComponent to="/$event" from="/_layout/$event/_layout/tickets" />
       </PrevButton.Slot>
       <PageTitle.Slot>Choose tickets</PageTitle.Slot>
       <div className="flex flex-col divide-y-2">
         <div className="flex items-start justify-between gap-10 pb-10">
           <div className="space-y-5">
-            <h3 className="text-allin-gray-dark text-2xl font-semibold">
+            <h3 className="text-base font-semibold text-allin-gray-dark md:text-2xl">
               Regular Pass- Flash Sale
             </h3>
-            <p className="text-[#A2A3B1]">includes ₦800 fee</p>
+            <p className="text-sm font-semibold text-[#A2A3B1] md:text-base">includes ₦800 fee</p>
             <TicketQuantity />
           </div>
-          <p className="text-allin-primary text-2xl font-medium">₦14,800</p>
+          <div className="text-right">
+            <p className="flex flex-wrap justify-end gap-x-2">
+              <span className="text-base font-medium line-through md:text-2xl">₦20,000</span>
+              <span className="text-base font-bold text-allin-primary md:text-2xl">₦10,000</span>
+            </p>
+            <p className="text-sm font-semibold text-[#A2A3B1] md:text-base">Early Bird Sales</p>
+          </div>
         </div>
         <div className="flex items-start justify-between gap-10 pt-10">
           <div className="space-y-5">
-            <h3 className="text-allin-gray-dark text-2xl font-semibold">Buddies- Flash Sale</h3>
-            <p className="text-[#A2A3B1]">includes ₦800 fee</p>
+            <h3 className="text-base font-semibold text-allin-gray-dark md:text-2xl">
+              Buddies- Flash Sale
+            </h3>
+            <p className="text-sm font-semibold text-[#A2A3B1] md:text-base">includes ₦800 fee</p>
             <TicketQuantity />
           </div>
-          <p className="text-allin-primary text-2xl font-medium">₦5,800</p>
+          <div className="text-right">
+            <p className="flex flex-wrap justify-end gap-x-2">
+              <span className="text-base font-medium line-through md:text-2xl">₦200,000</span>
+              <span className="text-base font-bold text-allin-primary md:text-2xl">₦100,000</span>
+            </p>
+            <p className="text-sm font-semibold text-[#A2A3B1] md:text-base">Early Bird Sales</p>
+          </div>
         </div>
       </div>
       <NextButton.Slot>

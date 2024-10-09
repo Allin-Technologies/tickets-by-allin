@@ -32,15 +32,13 @@ function Contact() {
   return (
     <>
       <PrevButton.Slot>
-        <PrevButtonComponent
-          props={{ to: "/$event/tickets", from: "/_layout/$event/_layout/contact" }}
-        />
+        <PrevButtonComponent to="/$event/tickets" from="/_layout/$event/_layout/contact" />
       </PrevButton.Slot>
       <PageTitle.Slot>Contact Information</PageTitle.Slot>
       <div className="bg-allin-primary/10">
         <p className="rounded border border-allin-primary p-5 font-medium">
           We’ve reserved your ticket. Please complete checkout within
-          <span className="text-allin-primary">10:00</span>to secure your tickets.
+          <span className="px-1 text-allin-primary">10:00</span>to secure your tickets.
         </p>
       </div>
       <form className="space-y-5">

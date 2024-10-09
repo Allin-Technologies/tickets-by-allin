@@ -1,4 +1,7 @@
+import React from "react";
 import { createFileRoute, Outlet, Link, useLocation } from "@tanstack/react-router";
+import MediaQuery, { useMediaQuery } from "react-responsive";
+import { Twirl as Hamburger } from "hamburger-react";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -34,66 +37,88 @@ export const Route = createFileRoute("/_layout")({
 });
 
 function Navbar() {
+  const [isExpanded, setIsExpanded] = React.useState(false);
   const { pathname } = useLocation();
   const isHomePage = pathname === "/";
+  const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
 
   const navItems = [
-    ["Discover Events", "/discover-events"],
-    ["How Tickets Work", "/"],
-    ["Pricing", "/"],
-    ["About", "/"],
+    { title: "Discover Events", slug: "/discover-events" },
+    { title: "How Tickets Work", slug: "/" },
+    { title: "Pricing", slug: "/" },
+    { title: "About", slug: "/" },
   ];
 
   return (
-    <div className={cn({ "absolute left-0 right-0 w-full": isHomePage })}>
-      <header className="mx-auto flex h-[100px] w-full max-w-[1500px] items-center justify-between gap-10 px-20">
-        <Link to="/">
-          <Logo />
+    <header className={cn({ "absolute left-0 right-0 w-full": isHomePage })}>
+      <nav
+        className="relative mx-auto flex h-[70px] w-full max-w-[1500px] items-center justify-between gap-10 px-5 md:h-[100px] md:px-20"
+        onMouseEnter={() => setIsExpanded(true)}
+        onMouseLeave={() => setIsExpanded(false)}
+      >
+        <Link to="/" className="scale-[.8] md:scale-[1]">
+          {isHomePage ? <LogoPlain /> : <Logo />}
         </Link>
-        <nav className="flex gap-10">
-          {navItems.map(([title, slug]) => (
+        <div
+          className={cn(
+            "absolute left-0 top-[70px] z-[999] flex h-[259.32px] w-full flex-col overflow-hidden backdrop-blur-lg transition-all duration-500 ease-in-out md:relative md:top-0 md:h-fit md:w-fit md:flex-row md:justify-end md:gap-10",
+            { "h-0": !isExpanded && isMobile }
+          )}
+        >
+          {navItems.map(({ title, slug }) => (
             <Link
               key={title}
               to={slug}
-              className={cn("font-semibold text-allin-text transition-all", {
-                "text-white hover:text-white/50": isHomePage,
-              })}
+              className={cn(
+                "border-b p-5 font-semibold text-allin-text transition-all md:border-none md:p-0 md:hover:text-allin-text/80",
+                {
+                  "text-white hover:bg-white/10 md:hover:bg-transparent md:hover:text-white/80":
+                    isHomePage,
+                }
+              )}
             >
               {title}
             </Link>
           ))}
-        </nav>
-      </header>
-    </div>
+        </div>
+        <MediaQuery maxWidth={768}>
+          <Hamburger
+            toggled={isExpanded}
+            toggle={setIsExpanded}
+            size={20}
+            easing="ease-in"
+            color={isHomePage ? "white" : "#2A254B"}
+            duration={0.5}
+          />
+        </MediaQuery>
+      </nav>
+    </header>
   );
 }
 
 function Footer() {
   return (
     <>
-      <div
-        style={{
-          background:
-            "linear-gradient(to right, #43dbdb33 0%, #43dbdb33 50%, #b9a6e81a 50%, #b9a6e81a 100%)",
-        }}
-      >
-        <div className="container flex items-start gap-40 *:w-full *:grow">
-          <div className="flex flex-col gap-10">
+      <div className="md:bg-[linear-gradient(to_right,_#43dbdb33_0%,_#43dbdb33_50%,_#b9a6e81a_50%,_#b9a6e81a_100%)]">
+        <div className="flex flex-col-reverse items-start md:container *:w-full *:grow sm:gap-20 md:flex-row lg:gap-40">
+          <div className="flex flex-col gap-7 bg-[#43dbdb33] px-10 py-16 md:gap-10 md:bg-transparent md:p-0">
             <h3 className="text-2xl font-bold">Contact us</h3>
-            <p className="text-2xl">Have an inquiry? We’ll be happy to assist you</p>
+            <p className="text-xl text-[#2C2B30] md:text-2xl">
+              Have an inquiry? <br className="md:hidden" /> We’ll be happy to assist you
+            </p>
             <div className="contents font-bold [&_a]:flex [&_a]:items-center [&_a]:gap-2">
               <Link>
                 <PhoneIcon /> +234 333 6527
               </Link>
               <Link>
-                <MailIcon /> Tickets@all-in.com
+                <MailIcon /> tickets@all-in.com
               </Link>
               <Link>
                 <LocationIcon /> All-in Headquaters, GRA Port Harcourt, Nigeria
               </Link>
             </div>
           </div>
-          <div className="">
+          <div className="bg-[#b9a6e81a] px-10 py-16 md:bg-transparent md:p-0">
             <h3 className="mb-10 text-2xl font-bold">Fill in your details</h3>
             <form className="flex flex-col gap-10">
               <div className="relative">
@@ -137,7 +162,7 @@ function Footer() {
                   className="h-12 rounded-none border-0 border-b border-allin-lilac px-0 shadow-none"
                 />
               </div>
-              <Button size="lg" className="mt-10 w-full">
+              <Button size="lg" className="w-full lg:mt-10">
                 Submit
               </Button>
             </form>
@@ -145,16 +170,18 @@ function Footer() {
         </div>
       </div>
       <footer className="bg-allin-gray-dark">
-        <div className="mx-auto w-full max-w-[1500px] space-y-10 px-20 py-10">
-          <LogoPlain />
-          <div className="flex w-full items-center justify-between gap-10 text-white">
-            <div className="flex gap-10 font-semibold">
+        <div className="mx-auto w-full max-w-[1500px] space-y-5 px-5 py-10 md:space-y-10 md:px-10">
+          <Link to="/" className="block w-fit scale-[.7] md:scale-[1]">
+            <LogoPlain />
+          </Link>
+          <div className="flex w-full flex-col justify-between gap-10 text-white md:flex-row md:items-center">
+            <div className="flex flex-wrap gap-x-10 gap-y-5 font-semibold">
               <Link>Discover Events</Link>
               <Link>How Tickets Work</Link>
               <Link>Pricing</Link>
               <Link>About</Link>
             </div>
-            <div className="flex gap-10">
+            <div className="flex flex-wrap gap-x-10 gap-y-5">
               <Link>
                 <FacebookIcon />
               </Link>

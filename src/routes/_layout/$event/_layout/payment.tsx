@@ -22,9 +22,7 @@ function Payment() {
   return (
     <>
       <PrevButton.Slot>
-        <PrevButtonComponent
-          props={{ to: "/$event/contact", from: "/_layout/$event/_layout/payment" }}
-        />
+        <PrevButtonComponent to="/$event/contact" from="/_layout/$event/_layout/payment" />
       </PrevButton.Slot>
       <PageTitle.Slot>Payment Method</PageTitle.Slot>
       <RadioGroup
@@ -34,7 +32,7 @@ function Payment() {
         <Label
           htmlFor="paystack"
           data-state={paymentOption === "paystack" && "active"}
-          className="data-[state=active]:bg-allin-primary/5 bg-transparent text-lg font-semibold transition data-[state=active]:font-black"
+          className="bg-transparent text-lg font-semibold transition data-[state=active]:bg-allin-primary/5 data-[state=active]:font-black"
         >
           <RadioGroupItem value="paystack" id="paystack" className="mr-3" />
           <div className="contents">
@@ -44,7 +42,7 @@ function Payment() {
         <Label
           htmlFor="flutterwave"
           data-state={paymentOption === "flutterwave" && "active"}
-          className="data-[state=active]:bg-allin-primary/5 bg-transparent text-lg font-semibold transition data-[state=active]:font-black"
+          className="bg-transparent text-lg font-semibold transition data-[state=active]:bg-allin-primary/5 data-[state=active]:font-black"
         >
           <RadioGroupItem value="flutterwave" id="flutterwave" className="mr-3" />
           <div className="contents">

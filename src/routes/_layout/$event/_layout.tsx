@@ -23,39 +23,39 @@ function EventLayout() {
       <PrevButton.Outlet>
         <span />
       </PrevButton.Outlet>
-      <div className="mb-20 flex w-fit items-center gap-7">
+      <div className="mb-20 flex w-fit items-center gap-5 md:gap-7">
         <h2
           data-state={pathname.includes("tickets") && "active"}
-          className="text-2xl font-semibold data-[state=active]:text-allin-primary"
+          className="text-lg font-semibold data-[state=active]:text-allin-primary md:text-2xl"
         >
           Tickets
         </h2>
         <ChevronIcon />
         <h2
           data-state={pathname.includes("contact") && "active"}
-          className="text-2xl font-semibold data-[state=active]:text-allin-primary"
+          className="text-lg font-semibold data-[state=active]:text-allin-primary md:text-2xl"
         >
           Contact
         </h2>
         <ChevronIcon />
         <h2
           data-state={pathname.includes("payment") && "active"}
-          className="text-2xl font-semibold data-[state=active]:text-allin-primary"
+          className="text-lg font-semibold data-[state=active]:text-allin-primary md:text-2xl"
         >
           Payment
         </h2>
       </div>
-      <div className="flex items-start gap-20">
-        <div className="grow space-y-5">
+      <div className="flex flex-col items-start gap-20 md:flex-row">
+        <div className="w-full space-y-5 md:w-fit md:grow">
           <PageTitle.Outlet>
-            <h1 className="mb-10 text-4xl font-bold">
+            <h1 className="mb-10 text-2xl font-bold md:text-4xl">
               <span />
             </h1>
           </PageTitle.Outlet>
           <Outlet />
         </div>
-        <div className="w-[350px] space-y-5 rounded-md border bg-white p-6 shadow-md">
-          <h2 className="text-2xl font-semibold">
+        <div className="w-full space-y-5 rounded-md border bg-white p-6 shadow-md md:w-[350px]">
+          <h2 className="text-xl font-semibold md:text-2xl">
             Super Junior SM Town Live'10 World Tour New York City
           </h2>
           <table className="w-full [&>tr>td:last-of-type]:text-right [&_td]:py-2 [&_td]:align-top">
@@ -114,10 +114,11 @@ type From =
 
 type To = "/$event" | "/$event/contact" | "/$event/payment" | "/$event/tickets";
 interface PrevButtonProps {
-  props: { to: To; from: From };
+  to: To;
+  from: From;
 }
 
-export const PrevButtonComponent = ({ props: { to, from } }: PrevButtonProps) => {
+export const PrevButtonComponent = ({ to, from }: PrevButtonProps) => {
   const navigate = useNavigate({});
   const { event } = useParams({ from });
 
