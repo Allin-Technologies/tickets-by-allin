@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import MixerIcon from "@/assets/icons/dj-mixer.svg?react";
 import BagPipesIcon from "@/assets/icons/bagpipes.svg?react";
@@ -24,6 +24,8 @@ export const Route = createFileRoute("/_layout/")({
 });
 
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="flex h-screen min-h-[750px] items-center justify-center bg-[url('@/assets/images/hero.png')] bg-cover bg-bottom bg-no-repeat">
@@ -33,7 +35,9 @@ function Home() {
             <br /> made easy
           </h1>
           <p className="md:text-3xl">for Meals, Events, Mobility & Spaces</p>
-          <Button size="lg">Get Started</Button>
+          <Button size="lg" onClick={() => navigate({ to: "/discover-events" })}>
+            Get Started
+          </Button>
         </div>
       </div>
       <div className="container flex flex-col items-center space-y-5 pb-5 text-center text-allin-gray-dark *:w-fit md:items-start md:text-left">
@@ -99,7 +103,7 @@ function Home() {
         </div>
       </div>
       <div className="container flex flex-col items-start gap-5 md:flex-row">
-        <div className="flex basis-1/3 flex-col items-center text-center md:items-start md:text-left">
+        <div className="flex w-full flex-col items-center text-center md:basis-1/3 md:items-start md:text-left">
           <h2 className="text-3xl font-bold leading-[38.16px] md:text-[72px] md:leading-[93.6px]">
             <span className="text-allin-primary">Real-Time </span> <br /> Data Dashboard
           </h2>
@@ -112,7 +116,7 @@ function Home() {
             </Button>
           </MediaQuery>
         </div>
-        <div className="basis-2/3">
+        <div className="w-full md:basis-2/3">
           <img src={RealTimeDataSvg} alt="default" className="h-full w-full object-cover" />
         </div>
         <MediaQuery maxWidth={768}>
