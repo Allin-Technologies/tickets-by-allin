@@ -7,14 +7,9 @@ import GuiterIcon from "@/assets/icons/guitar.svg?react";
 import ArrowIcon from "@/assets/icons/arrow.svg?react";
 import RealTimeDataSvg from "@/assets/images/real-time-data.svg";
 import TrackSaleSvg from "@/assets/images/track-ticket-sale.svg";
-import AppleLogo from "@/assets/icons/apple.svg?react";
-import FacebookLogo from "@/assets/icons/facebook2.svg?react";
-import NokiaLogo from "@/assets/icons/nokia.svg?react";
-import OracleLogo from "@/assets/icons/oracle.svg?react";
-import GoogleLogo from "@/assets/icons/google.svg?react";
-import MicrosoftLogo from "@/assets/icons/microsoft.svg?react";
-import AirbnbLogo from "@/assets/icons/airbnb.svg?react";
-import AxureLogo from "@/assets/icons/axure.svg?react";
+import AbittoLogo from "@/assets/icons/abitto.svg?react";
+import LoopLogo from "@/assets/icons/loop.svg?react";
+import TedxLogo from "@/assets/icons/tedx.svg?react";
 import QuoteIcon from "@/assets/icons/quotes.svg?react";
 import DefaultProfile from "@/assets/images/default_profile.png";
 import MediaQuery from "react-responsive";
@@ -28,8 +23,9 @@ function Home() {
 
   return (
     <>
-      <div className="flex h-screen min-h-[750px] items-center justify-center bg-[url('@/assets/images/hero.png')] bg-cover bg-bottom bg-no-repeat">
-        <div className="mx-5 space-y-5 text-center text-white md:space-y-8">
+      <div className="relative flex h-screen min-h-[750px] items-center justify-center bg-[url('@/assets/images/hero.png')] bg-cover bg-center bg-no-repeat">
+        <div className="absolute right-0 top-0 h-full w-full bg-gradient-to-b from-[#381DDB] to-[#00000033]/20" />
+        <div className="relative mx-5 space-y-5 text-center text-white md:space-y-8">
           <h1 className="text-[32px] font-bold capitalize leading-[40.32px] md:text-[96px] md:leading-[120.96px]">
             Ticket experience
             <br /> made easy
@@ -84,30 +80,33 @@ function Home() {
         </div>
       </div>
       <div className="container flex flex-col items-start gap-20 *:w-full *:grow md:flex-row">
-        <div className="relative">
-          {/* <div className="absolute -top-16 aspect-square w-[460px] rounded-3xl border bg-allin-text/10 shadow-md" />
-          <div className="relative ml-auto aspect-square w-[460px] rounded-3xl border bg-white shadow-md" /> */}
-          <img src={TrackSaleSvg} alt="default" className="h-full w-full scale-[1.2]" />
+        <div>
+          <img
+            src={TrackSaleSvg}
+            alt="default"
+            className="h-full w-full object-cover md:scale-[1.3]"
+          />
         </div>
         <div className="flex flex-col items-center text-center md:items-start md:text-left">
           <h2 className="text-3xl font-bold leading-[38.16px] md:text-[72px] md:leading-[93.6px]">
-            <span className="text-allin-primary">Track</span> <br />
-            Ticket Sales
+            Set up for <br />
+            your <span className="text-allin-primary">unique operation in seconds</span>
           </h2>
           <p className="my-5 text-[#222222] md:text-2xl">
             Monitor sales in real-time and see which tickets perform best.
           </p>
           <Button size="lg" variant="outline" className="inline-flex items-center gap-3 md:mt-10">
-            Create an event <ArrowIcon />
+            Learn More <ArrowIcon />
           </Button>
         </div>
       </div>
       <div className="container flex flex-col items-start gap-5 md:flex-row">
         <div className="flex w-full flex-col items-center text-center md:basis-1/3 md:items-start md:text-left">
           <h2 className="text-3xl font-bold leading-[38.16px] md:text-[72px] md:leading-[93.6px]">
-            <span className="text-allin-primary">Real-Time </span> <br /> Data Dashboard
+            Real-Time <br />
+            <span className="text-allin-primary"> Data Dashboard</span>
           </h2>
-          <p className="my-5 text-[#222222] md:text-2xl">
+          <p className="my-5 text-[#222222] md:text-xl">
             Access a central hub for sales, ticket scans, and vendor performance data.
           </p>
           <MediaQuery minWidth={768}>
@@ -125,19 +124,14 @@ function Home() {
           </Button>
         </MediaQuery>
       </div>
-      <div className="no-scrollbar mx-auto grid max-w-[1500px] grid-cols-[repeat(8,_minmax(auto,_1fr))] items-center gap-x-16 overflow-scroll p-5 md:container *:object-cover md:grid-cols-4 md:gap-10">
-        <AppleLogo />
-        <FacebookLogo />
-        <NokiaLogo />
-        <OracleLogo />
-        <GoogleLogo />
-        <MicrosoftLogo />
-        <AirbnbLogo />
-        <AxureLogo />
+      <div className="no-scrollbar mx-auto grid max-w-[1500px] grid-cols-[repeat(8,_minmax(auto,_1fr))] items-center gap-x-16 overflow-scroll p-5 md:container *:object-cover md:grid-cols-3 md:gap-10">
+        <AbittoLogo />
+        <LoopLogo />
+        <TedxLogo />
       </div>
       <div className="container max-w-full space-y-20 px-0 text-[#222222]">
-        <h2 className="mx-auto w-56 text-center text-[32px] font-bold leading-[40.32px] md:w-full md:text-[96px] md:leading-[120.96px]">
-          Real people, Real reviews
+        <h2 className="mx-auto w-56 text-center text-[32px] font-bold leading-[40.32px] md:w-4/5 md:text-[72px] md:leading-[93.6px]">
+          Real people,<span className="md:text-allin-primary"> Real reviews</span>
         </h2>
         <div className="no-scrollbar mx-auto flex h-full w-full max-w-[1500px] items-stretch gap-5 overflow-x-scroll px-5 pb-24 *:min-h-[100px] *:min-w-full *:grow *:bg-allin-lilac/20 md:gap-10 md:px-10 md:pb-28 *:md:w-full *:md:min-w-[770px]">
           <div className="relative">
@@ -145,7 +139,7 @@ function Home() {
               <span className="self-start">
                 <QuoteIcon />
               </span>
-              <p className="px-5 text-center md:px-7">
+              <p className="px-5 text-center text-[16px] font-normal leading-[24px] md:px-7">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                 Ipsum has been the industry's standard dummy text ever since the 1500s, when an
                 unknown printer took a galley of type and scrambled it to make a type specimen book.

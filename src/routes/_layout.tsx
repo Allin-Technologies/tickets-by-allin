@@ -50,7 +50,7 @@ function Navbar() {
   ];
 
   return (
-    <header className={cn({ "absolute left-0 right-0 w-full": isHomePage })}>
+    <header className={cn({ "absolute left-0 right-0 z-[999] w-full": isHomePage })}>
       <nav
         className="relative mx-auto flex h-[70px] w-full max-w-[1500px] items-center justify-between gap-10 px-5 md:h-[100px] md:px-20"
         onMouseEnter={() => setIsExpanded(true)}
