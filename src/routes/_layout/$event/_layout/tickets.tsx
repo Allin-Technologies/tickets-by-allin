@@ -42,7 +42,7 @@ function Tickets() {
               <span className="text-base font-medium line-through md:text-2xl">₦20,000</span>
               <span className="text-base font-bold text-allin-primary md:text-2xl">₦10,000</span>
             </p>
-            <p className="text-sm font-semibold text-[#A2A3B1] md:text-base">Early Bird Sales</p>
+            <p className="text-sm font-semibold text-[#A2A3B1] md:text/-base">Early Bird Sales</p>
           </div>
         </div>
         <div className="flex items-start justify-between gap-10 pt-10">

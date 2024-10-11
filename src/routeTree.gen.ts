@@ -15,6 +15,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
+import { Route as LayoutPaymentSuccessImport } from './routes/_layout/payment-success'
 import { Route as LayoutDiscoverEventsImport } from './routes/_layout/discover-events'
 import { Route as LayoutEventIndexImport } from './routes/_layout/$event/index'
 import { Route as LayoutEventLayoutImport } from './routes/_layout/$event/_layout'
@@ -40,6 +41,11 @@ const LayoutEventRoute = LayoutEventImport.update({
 
 const LayoutIndexRoute = LayoutIndexImport.update({
   path: '/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutPaymentSuccessRoute = LayoutPaymentSuccessImport.update({
+  path: '/payment-success',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -89,6 +95,13 @@ declare module '@tanstack/react-router' {
       path: '/discover-events'
       fullPath: '/discover-events'
       preLoaderRoute: typeof LayoutDiscoverEventsImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/payment-success': {
+      id: '/_layout/payment-success'
+      path: '/payment-success'
+      fullPath: '/payment-success'
+      preLoaderRoute: typeof LayoutPaymentSuccessImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/': {
@@ -176,12 +189,14 @@ const LayoutEventRouteWithChildren = LayoutEventRoute._addFileChildren(
 
 interface LayoutRouteChildren {
   LayoutDiscoverEventsRoute: typeof LayoutDiscoverEventsRoute
+  LayoutPaymentSuccessRoute: typeof LayoutPaymentSuccessRoute
   LayoutIndexRoute: typeof LayoutIndexRoute
   LayoutEventRoute: typeof LayoutEventRouteWithChildren
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutDiscoverEventsRoute: LayoutDiscoverEventsRoute,
+  LayoutPaymentSuccessRoute: LayoutPaymentSuccessRoute,
   LayoutIndexRoute: LayoutIndexRoute,
   LayoutEventRoute: LayoutEventRouteWithChildren,
 }
@@ -192,6 +207,7 @@ const LayoutRouteWithChildren =
 export interface FileRoutesByFullPath {
   '': typeof LayoutRouteWithChildren
   '/discover-events': typeof LayoutDiscoverEventsRoute
+  '/payment-success': typeof LayoutPaymentSuccessRoute
   '/': typeof LayoutIndexRoute
   '/$event': typeof LayoutEventLayoutRouteWithChildren
   '/$event/': typeof LayoutEventIndexRoute
@@ -202,6 +218,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/discover-events': typeof LayoutDiscoverEventsRoute
+  '/payment-success': typeof LayoutPaymentSuccessRoute
   '/': typeof LayoutIndexRoute
   '/$event': typeof LayoutEventIndexRoute
   '/$event/contact': typeof LayoutEventLayoutContactRoute
@@ -213,6 +230,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_layout': typeof LayoutRouteWithChildren
   '/_layout/discover-events': typeof LayoutDiscoverEventsRoute
+  '/_layout/payment-success': typeof LayoutPaymentSuccessRoute
   '/_layout/': typeof LayoutIndexRoute
   '/_layout/$event': typeof LayoutEventRouteWithChildren
   '/_layout/$event/_layout': typeof LayoutEventLayoutRouteWithChildren
@@ -227,6 +245,7 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/discover-events'
+    | '/payment-success'
     | '/'
     | '/$event'
     | '/$event/'
@@ -236,6 +255,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/discover-events'
+    | '/payment-success'
     | '/'
     | '/$event'
     | '/$event/contact'
@@ -245,6 +265,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_layout'
     | '/_layout/discover-events'
+    | '/_layout/payment-success'
     | '/_layout/'
     | '/_layout/$event'
     | '/_layout/$event/_layout'
@@ -282,12 +303,17 @@ export const routeTree = rootRoute
       "filePath": "_layout.tsx",
       "children": [
         "/_layout/discover-events",
+        "/_layout/payment-success",
         "/_layout/",
         "/_layout/$event"
       ]
     },
     "/_layout/discover-events": {
       "filePath": "_layout/discover-events.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/payment-success": {
+      "filePath": "_layout/payment-success.tsx",
       "parent": "/_layout"
     },
     "/_layout/": {

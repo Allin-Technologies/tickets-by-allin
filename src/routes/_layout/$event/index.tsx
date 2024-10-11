@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import MediaQuery from "react-responsive";
 
 export const Route = createFileRoute("/_layout/$event/")({
-  component: Event,
+  component: Event, 
+  
 });
 
 function Event() {
