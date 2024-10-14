@@ -23,6 +23,10 @@ import TwitterIcon from "@/assets/icons/Twitter.svg?react";
 import LinkedInIcon from "@/assets/icons/Linkedin.svg?react";
 import InstagramIcon from "@/assets/icons/Instagram.svg?react";
 import { cn } from "@/lib/utils";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Textarea } from "@/components/ui/textarea";
 
 export const Route = createFileRoute("/_layout")({
   component: () => (
@@ -97,6 +101,30 @@ function Navbar() {
 }
 
 function Footer() {
+  const FormSchema = z.object({
+    name: z.string().min(1, { message: "Name is required" }),
+    email: z
+      .string()
+      .email({ message: "A valid email is required" })
+      .min(1, { message: "Email is required" }),
+    reason: z.string().min(1, { message: "Please select a reason" }),
+    message: z.string().min(1, { message: "Message cannot be empty" }),
+  });
+
+  type ContactFormValues = z.infer<typeof FormSchema>;
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(FormSchema),
+  });
+
+  const onSubmit = (data: ContactFormValues) => {
+    console.log(data);
+    // Handle form submission logic here
+  };
   return (
     <>
       <div className="md:bg-[linear-gradient(to_right,_#43dbdb33_0%,_#43dbdb33_50%,_#b9a6e81a_50%,_#b9a6e81a_100%)]">
@@ -120,28 +148,36 @@ function Footer() {
           </div>
           <div className="bg-[#b9a6e81a] px-10 py-16 md:bg-transparent md:p-0">
             <h3 className="mb-10 text-2xl font-bold">Fill in your details</h3>
-            <form className="flex flex-col gap-10">
+            <form className="flex flex-col gap-10" onSubmit={handleSubmit(onSubmit)}>
               <div className="relative">
                 <Label className="absolute -top-4 z-[1] text-sm text-[#222222]">Name</Label>
                 <Input
                   type="text"
                   placeholder="Enter name"
+                  {...register("name")}
                   className="h-12 rounded-none border-0 border-b border-gray-300 px-0 shadow-none"
                 />
+                {errors.name && (
+                  <span className="text-xs text-red-500">{errors.name?.message}</span>
+                )}
               </div>
               <div className="relative">
                 <Label className="absolute -top-4 z-[1] text-sm text-[#222222]">Email</Label>
                 <Input
                   type="email"
+                  {...register("email")}
                   placeholder="Enter email"
                   className="h-12 rounded-none border-0 border-b border-gray-300 px-0 shadow-none"
                 />
+                {errors.email && (
+                  <span className="text-xs text-red-500">{errors.email?.message}</span>
+                )}
               </div>
               <div className="relative">
                 <Label className="absolute -top-4 z-[1] text-sm text-[#222222]">
                   Reason to contact
                 </Label>
-                <Select>
+                <Select onValueChange={(value) => setValue("reason", value)}>
                   <SelectTrigger className="h-12 rounded-none border-0 border-b border-gray-300 px-0 shadow-none focus-visible:ring-0">
                     <SelectValue placeholder="Select reason" />
                   </SelectTrigger>
@@ -156,13 +192,13 @@ function Footer() {
               </div>
               <div className="relative">
                 <Label className="absolute -top-4 z-[1] text-sm text-allin-lilac">Message</Label>
-                <Input
-                  type="message"
+                <Textarea
+                  {...register("message")}
                   placeholder="What is your message?"
-                  className="h-12 rounded-none border-0 border-b border-allin-lilac px-0 shadow-none"
+                  className="h-12 rounded-none border-0 border-b border-allin-lilac px-0 shadow-none focus-visible:ring-0"
                 />
               </div>
-              <Button size="lg" className="w-full lg:mt-10">
+              <Button size="lg" type="submit" className="w-full lg:mt-10">
                 Submit
               </Button>
             </form>
